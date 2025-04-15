@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot name="rsc" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+ <xacro:property name="button_color" value="yellow"/>   <!-- Modify here the color of the botton -->
+ <xacro:property name="face" value="joy"/>   <!-- Modify here the emotion face of the RSC -->
+ 
+  <!-- Define materials -->
+<material name="blue">
+  <color rgba="0 0 0.8 1"/>
+</material>
+
+<material name="white">
+  <color rgba="0.9 0.9 0.9 1"/>
+</material>
+
+<material name="black">
+  <color rgba="0 0 0 1"/>
+</material>
+
+<material name="red">
+  <color rgba="1 0 0 1"/>
+</material>
+
+<material name="yellow">
+  <color rgba="1 1 0 1"/>
+</material>
+
+<material name="green">
+  <color rgba="0 1 0 1"/>
+</material>
+
+<material name="orange">
+  <color rgba="1 0.65 0 1"/>
+</material>
+
+<material name="purple">
+  <color rgba="0.5 0 0.5 1"/>
+</material>
+
+<material name="gray">
+  <color rgba="0.5 0.5 0.5 1"/>
+</material>
+
+<material name="cyan">
+  <color rgba="0 1 1 1"/>
+</material>
+
+<material name="pink">
+  <color rgba="1 0.75 0.8 1"/>
+</material>
+
+<material name="joy">
+  <texture filename="package://digital_twin/textures/joy.png"/>
+</material>
+
+<material name="anger">
+  <texture filename="package://digital_twin/textures/anger.png"/>
+</material>
+
+<material name="pride">
+  <texture filename="package://digital_twin/textures/pride.png"/>
+</material>
+
+<material name="surprise">
+  <texture filename="package://digital_twin/textures/surprise.png"/>
+</material>
+
+<material name="caring">
+  <texture filename="package://digital_twin/textures/caring.png"/>
+</material>
+
+<material name="fun">
+  <texture filename="package://digital_twin/textures/fun.png"/>
+</material>
+
+<material name="neutral">
+  <texture filename="package://digital_twin/textures/neutral.png"/>
+</material>
+
+  <!-- Body -->
+  <link name="body">
+    <visual>
+      <origin xyz="-0.6 0.44 0.4" rpy="1.5708 0 0"/>
+      <geometry>
+        <mesh filename="package://digital_twin/meshes/body.STL" scale="0.01 0.01 0.01" />
+      </geometry>
+      <material name="blue"/>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://digital_twin/meshes/body.STL" scale="0.01 0.01 0.01" />
+      </geometry>
+    </collision>
+  </link>
+
+
+  <!-- Arm right Link -->
+  <link name="flipper_r">
+    <visual>
+      <origin xyz="-0.55 -0.19 -0.55" rpy="-1.5708 3.14 0"/> <!-- Define the visual origin of arm_1 -->
+      <geometry>
+        <mesh filename="package://digital_twin/meshes/flipper.STL" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://digital_twin/meshes/flipper.STL" scale="0.01 0.01 0.01"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- Joint for Arm 1 Rotation Around X-Axis Center -->
+  <joint name="flipper_r_to_body" type="continuous">
+    <parent link="body"/>
+    <child link="flipper_r"/>
+    <origin xyz="0 0.05 0.9" rpy="0 0 0"/> <!-- Center the rotation around arm_1’s origin -->
+    <axis xyz="1 0 0"/> <!-- Set rotation around x-axis -->
+  </joint>
+
+  <!-- Arm 2 Link -->
+  <link name="flipper_l">
+    <visual>
+    <origin xyz="+0.55 0.19 -0.55" rpy="1.5708 0 0"/>
+      <geometry>
+        <mesh filename="package://digital_twin/meshes/flipper.STL" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://digital_twin/meshes/flipper.STL" scale="0.01 0.01 0.01"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- Joint for Arm 1 Rotation Around X-Axis Center -->
+  <joint name="flipper_l_to_body" type="continuous">
+    <parent link="body"/>
+    <child link="flipper_l"/>
+    <origin xyz="0 0.05 0.9" rpy="0 0 0"/> <!-- Center the rotation around arm_1’s origin -->
+    <axis xyz="1 0 0"/> <!-- Set rotation around x-axis -->
+  </joint>
+
+
+
+  <link name="base">
+    <visual>
+      <origin xyz="-0.55 0.6 0.09" rpy="1.5708 0 0"/>
+      <geometry>
+        <mesh filename="package://digital_twin/meshes/base.STL" scale="0.01 0.01 0.01" />
+      </geometry>
+      <material name="blue"/>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://digital_twin/meshes/base.STL" scale="0.01 0.01 0.01" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <joint name="base_to_body" type="fixed">
+     <parent link="base" />
+     <child link="body" />
+     <origin xyz="0 0 0" rpy="0 0 0" />
+</joint>
+
+  <link name="frame">
+    <visual>
+      <origin xyz="-0.458 -0.20 0.42" rpy="1.39 0 0"/>
+      <geometry>
+        <mesh filename="package://digital_twin/meshes/frame.STL" scale="0.01 0.01 0.01" />
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://digital_twin/meshes/frame.STL" scale="0.01 0.01 0.01" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <joint name="frame_to_body" type="fixed">
+     <parent link="body" />
+     <child link="frame" />
+     <origin xyz="0 0 0" rpy="0 0 0" />
+</joint>
+
+  <link name="screen">
+    <visual>
+      <origin xyz="-0.377 -0.25 0.5295" rpy="1.39 0 0"/>
+      <geometry>
+        <mesh filename="package://digital_twin/meshes/screen.STL" scale="0.01 0.01 0.01" />
+      </geometry>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://digital_twin/meshes/screen.STL" scale="0.01 0.01 0.01" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <joint name="screen_to_body" type="fixed">
+     <parent link="body" />
+     <child link="screen" />
+     <origin xyz="0 0 0" rpy="0 0 0" />
+</joint>
+
+<link name="image">
+    <visual>
+      <origin xyz="0 -0.45 0.7" rpy="1.5708 -1.5708 0"/>
+      <geometry>
+        <box size="0.4 0.58 0.001"/>
+      </geometry>
+      <material name="${face}"/>
+    </visual>
+  </link>
+  
+  <joint name="image_to_body" type="fixed">
+     <parent link="body" />
+     <child link="image" />
+     <origin xyz="0 0 0" rpy="-0.16 0 0" />
+</joint>
+
+  <link name="lid">
+    <visual>
+      <origin xyz="-0.543 0.44 0.96" rpy="1.5708 0 0"/>
+      <geometry>
+        <mesh filename="package://digital_twin/meshes/lid.STL" scale="0.01 0.01 0.01" />
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://digital_twin/meshes/lid.STL" scale="0.01 0.01 0.01" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <joint name="lid_to_body" type="fixed">
+     <parent link="body" />
+     <child link="lid" />
+     <origin xyz="0 0 0" rpy="0 0 0" />
+</joint>
+
+  <link name="button">
+    <visual>
+      <origin xyz="-0.3 0.4 0.78" rpy="1.5708 0 0"/>
+      <geometry>
+        <mesh filename="package://digital_twin/meshes/button.STL" scale="0.01 0.01 0.01" />
+      </geometry>
+      <material name="${button_color}"/>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://digital_twin/meshes/button.STL" scale="0.01 0.01 0.01" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <joint name="button_to_body" type="fixed">
+     <parent link="body" />
+     <child link="button" />
+     <origin xyz="0 0 0" rpy="0 0 0" />
+</joint>
+
+  <link name="back">
+    <visual>
+      <origin xyz="-0.455 0.435 0.415" rpy="1.5708 0 0"/>
+      <geometry>
+        <mesh filename="package://digital_twin/meshes/back.STL" scale="0.01 0.01 0.01" />
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://digital_twin/meshes/back.STL" scale="0.01 0.01 0.01" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <joint name="back_to_body" type="fixed">
+     <parent link="body" />
+     <child link="back" />
+     <origin xyz="0 0 0" rpy="0 0 0" />
+</joint>
+
+
+
+</robot>
+
