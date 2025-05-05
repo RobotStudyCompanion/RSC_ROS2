@@ -5,7 +5,7 @@ import os
 from launch.substitutions import Command
 from launch_ros.actions import Node
 
-robot_description = os.path.join(get_package_share_directory('RSC_description'), 'urdf/main.urdf.xacro')
+robot_description = os.path.join(get_package_share_directory('rsc_description'), 'urdf/main.urdf.xacro')
 
 def generate_launch_description():
     return LaunchDescription([
@@ -13,7 +13,7 @@ def generate_launch_description():
             package='rviz2',
             executable='rviz2',
             name='rviz2',
-            arguments=['-d', 'install/RSC_description/share/RSC_description/rviz/RSC_show.rviz'],
+            arguments=['-d', 'install/rsc_description/share/rsc_description/rviz/rsc_show.rviz'],
             output='screen'
         ),
         Node(
