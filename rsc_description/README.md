@@ -4,7 +4,7 @@
 
 - **Robot Visualization:** View the virtual twin of the RSC in **RViz2**.
 - **Customizable Appearance:** Change the robot’s colors and facial expressions.
-
+- **Torso Movement Digital Twin:** A second robot is available with an extra rotational joint.
 ## Installation
 
 ### Prerequisites
@@ -17,13 +17,9 @@ Ensure you have the following installed:
 ### Steps
 
 1. Clone the repository into your ROS 2 workspace:
-   ```sh
-   cd ~/ros2_ws/src
-   git clone https://github.com/yourusername/rsc_description.git
-   ```
+
 2. Build the package:
    ```sh
-   cd ~/ros2_ws
    colcon build --packages-select rsc_description
    ```
 3. Source the workspace:

@@ -1,9 +1,0 @@
-<library path="video_screen_display">
-  <class name="rviz_video_screen::VideoScreenDisplay"
-         type="rviz_video_screen::VideoScreenDisplay"
-         base_class_type="rviz_common::Display">
-    <description>
-      Shows a video stream on a 3D screen in the scene.
-    </description>
-  </class>
-</library>
